@@ -13,8 +13,8 @@ class Wnd_CDN extends CDN_Rewrite {
 		Wnd_CDN::$option = get_option('wndoss');
 		parent::__construct(
 			Wnd_CDN::$option['wndoss_site_url'] ?? get_option('siteurl'),
-			Wnd_CDN::$option['wndoss_cdn_url'] ?? 'wp-content,wp-includes',
-			Wnd_CDN::$option['wndoss_cdn_dirs'] ?? '',
+			Wnd_CDN::$option['wndoss_cdn_url'] ?? '',
+			Wnd_CDN::$option['wndoss_cdn_dirs'] ?? 'wp-content,wp-includes',
 			array_map('trim', explode(',', Wnd_CDN::$option['wndoss_cdn_excludes'] ?? '.php'))
 		);
 
