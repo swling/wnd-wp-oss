@@ -43,7 +43,7 @@ class Wnd_OSS {
 		// 本应用在在OSS中的存储路径
 		Wnd_OSS::$bucket_path = isset($option['wndoss_bucket_path']) ? trim($option['wndoss_bucket_path'], '/') : '';
 		// OSS文件访问地址
-		Wnd_OSS::$baseurl = $option['wndoss_baseurl'] ?? '';
+		Wnd_OSS::$baseurl = isset($option['wndoss_baseurl']) ? trim($option['wndoss_baseurl'], '/') : '';
 		// 是否在本地服务器留存文件
 		Wnd_OSS::$local_storage = $option['wndoss_local_storage'] ?? false;
 
