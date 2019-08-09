@@ -87,7 +87,7 @@ function wndoss_options()
 					<td valign="top">OSS Endpoint</td>
 					<td>
 						<input type="text" name="wndoss_endpoint" value="<?php echo $options['wndoss_endpoint'] ?? ''; ?>" class="regular-text">
-						<p><i>*服务器与OSS处于同一区域可填内网地址，否则请填公网地址(无需添加 http:// 前缀)<i></p>
+						<p><i>*服务器与OSS处于同一区域可填内网地址，否则请填公网地址(无需添加 http:// 前缀)</i></p>
 					</td>
 				</tr>
 
@@ -102,7 +102,7 @@ function wndoss_options()
 					<td valign="top">OSS Bucket路径</td>
 					<td>
 						<input type="text" name="wndoss_bucket_path" value="<?php echo $options['wndoss_bucket_path'] ?? ''; ?>" class="regular-text">
-						<p><i>*本应用上传的文件对应在OSS中的存储路径，留空为根目录<i></p>
+						<p><i>*本应用上传的文件对应在OSS中的存储路径，留空为根目录</i></p>
 					</td>
 				</tr>
 
@@ -110,7 +110,7 @@ function wndoss_options()
 					<td valign="top">OSS base url</td>
 					<td>
 						<input type="text" name="wndoss_baseurl" value="<?php echo $options['wndoss_baseurl'] ?? ''; ?>" class="regular-text">
-						<p><i>*OSS文件公网访问路径。通常为：Bucket域名 + 本应用对应的存储路径<i></p>
+						<p><i>*OSS文件公网访问路径。通常为：Bucket域名 + 本应用对应的存储路径</i></p>
 					</td>
 				</tr>
 
@@ -139,7 +139,7 @@ function wndoss_options()
 					<td valign="top">CDN URL</td>
 					<td>
 						<input type="text" name="wndoss_cdn_url" value="<?php echo $options['wndoss_cdn_url'] ?? ''; ?>" class="regular-text">
-						<p><i>*将以此替换静态资源的本地URL<i></p>
+						<p><i>*将以此替换静态资源的本地URL</i></p>
 					</td>
 				</tr>
 
@@ -147,7 +147,7 @@ function wndoss_options()
 					<td valign="top">CDN 目录</td>
 					<td>
 						<input type="text" name="wndoss_cdn_dirs" value="<?php echo $options['wndoss_cdn_dirs'] ?? ''; ?>" class="regular-text">
-						<p><i>*哪些目录的具体资源需要设置CDN，通常为wp-content / wp-includes<i></p>
+						<p><i>*哪些目录的具体资源需要设置CDN，通常为wp-content / wp-includes</i></p>
 					</td>
 				</tr>
 
@@ -155,7 +155,7 @@ function wndoss_options()
 					<td valign="top">CDN 文件后缀排除</td>
 					<td>
 						<input type="text" name="wndoss_cdn_excludes" value="<?php echo $options['wndoss_cdn_excludes'] ?? ''; ?>" class="regular-text">
-						<p><i>*以逗号区分如：.php, .flv, .do<i></p>
+						<p><i>*以逗号区分如：.php, .flv, .do</i></p>
 					</td>
 				</tr>
 
