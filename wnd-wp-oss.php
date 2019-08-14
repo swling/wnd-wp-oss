@@ -4,7 +4,7 @@
  *Plugin Name: Wnd-WP-OSS
  *Plugin URI: https://wndwp.com
  *Description: 基于阿里云官方PHP SDK，将WordPress文件上传平滑移动到阿里云对象存储
- *Version: 0.1
+ *Version: 0.11
  *Author: swling
  *Author URI: https://wndwp.com
  *
