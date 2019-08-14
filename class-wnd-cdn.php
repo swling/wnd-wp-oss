@@ -6,23 +6,23 @@ namespace WND\CDN;
 
 class Wnd_CDN extends CDN_Rewrite {
 
-	public static $option;
+	protected static $option;
 
-	function __construct() {
+	public function __construct() {
 
-		Wnd_CDN::$option = get_option('wndoss');
+		self::$option = get_option('wndoss');
 		parent::__construct(
-			Wnd_CDN::$option['wndoss_site_url'] ?? get_option('siteurl'),
-			Wnd_CDN::$option['wndoss_cdn_url'] ?? '',
-			Wnd_CDN::$option['wndoss_cdn_dirs'] ?? 'wp-content,wp-includes',
-			array_map('trim', explode(',', Wnd_CDN::$option['wndoss_cdn_excludes'] ?? '.php'))
+			self::$option['wndoss_site_url'] ?? get_option('siteurl'),
+			self::$option['wndoss_cdn_url'] ?? '',
+			self::$option['wndoss_cdn_dirs'] ?? 'wp-content,wp-includes',
+			array_map('trim', explode(',', self::$option['wndoss_cdn_excludes'] ?? '.php'))
 		);
 
 		add_action('template_redirect', array($this, 'register_as_output_buffer'));
 	}
 
 	public function register_as_output_buffer() {
-		if ($this->blog_url != Wnd_CDN::$option['wndoss_cdn_url']) {
+		if ($this->blog_url != self::$option['wndoss_cdn_url']) {
 			ob_start(array(&$this, 'rewrite'));
 		}
 	}
@@ -31,11 +31,11 @@ class Wnd_CDN extends CDN_Rewrite {
 
 class CDN_Rewrite {
 
-	var $blog_url = null;
-	var $cdn_url = null;
-	var $include_dirs = null;
-	var $excludes = array();
-	var $rootrelative = false;
+	protected $blog_url = null;
+	protected $cdn_url = null;
+	protected $include_dirs = null;
+	protected $excludes = array();
+	protected $rootrelative = false;
 
 	function __construct($blog_url, $cdn_url, $include_dirs, array $excludes, $root_relative = false) {
 		$this->blog_url = $blog_url;

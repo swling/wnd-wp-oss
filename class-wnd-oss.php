@@ -13,15 +13,15 @@ use OSS\OssClient;
  */
 class Wnd_OSS {
 
-	public static $access_key_id;
-	public static $access_key_secret;
-	public static $endpoint;
-	public static $bucket;
-	public static $bucket_path;
-	public static $baseurl;
-	public static $local_storage;
+	protected static $access_key_id;
+	protected static $access_key_secret;
+	protected static $endpoint;
+	protected static $bucket;
+	protected static $bucket_path;
+	protected static $baseurl;
+	protected static $local_storage;
 
-	function __construct() {
+	public function __construct() {
 
 		/**
 		 *基础配置
@@ -33,19 +33,19 @@ class Wnd_OSS {
 		$option = get_option('wndoss');
 
 		// 不解释
-		Wnd_OSS::$access_key_id = $option['wndoss_access_key_id'] ?? '';
-		Wnd_OSS::$access_key_secret = $option['wndoss_access_key_secret'] ?? '';
+		self::$access_key_id = $option['wndoss_access_key_id'] ?? '';
+		self::$access_key_secret = $option['wndoss_access_key_secret'] ?? '';
 
 		// Endpoint如服务器与oss所属同一区域，可填内网地址。
-		Wnd_OSS::$endpoint = $option['wndoss_endpoint'] ?? '';
+		self::$endpoint = $option['wndoss_endpoint'] ?? '';
 		// 存储空间名称
-		Wnd_OSS::$bucket = $option['wndoss_bucket'] ?? '';
+		self::$bucket = $option['wndoss_bucket'] ?? '';
 		// 本应用在在OSS中的存储路径
-		Wnd_OSS::$bucket_path = isset($option['wndoss_bucket_path']) ? trim($option['wndoss_bucket_path'], '/') : '';
+		self::$bucket_path = isset($option['wndoss_bucket_path']) ? trim($option['wndoss_bucket_path'], '/') : '';
 		// OSS文件访问地址
-		Wnd_OSS::$baseurl = isset($option['wndoss_baseurl']) ? trim($option['wndoss_baseurl'], '/') : '';
+		self::$baseurl = isset($option['wndoss_baseurl']) ? trim($option['wndoss_baseurl'], '/') : '';
 		// 是否在本地服务器留存文件
-		Wnd_OSS::$local_storage = $option['wndoss_local_storage'] ?? false;
+		self::$local_storage = $option['wndoss_local_storage'] ?? false;
 
 		/**
 		 *hook
@@ -76,7 +76,7 @@ class Wnd_OSS {
 
 		// 获取WordPress上传并处理后文件
 		$file = get_attached_file($post_ID);
-		$oss_file = str_replace(wp_get_upload_dir()['basedir'], Wnd_OSS::$bucket_path, $file);
+		$oss_file = str_replace(wp_get_upload_dir()['basedir'], self::$bucket_path, $file);
 		$oss_file = trim($oss_file, '/');
 
 		// 调用WordPress，根据尺寸进行图片裁剪、上传到oss的文件将是按指定尺寸裁剪后的文件
@@ -91,8 +91,8 @@ class Wnd_OSS {
 		}
 
 		try {
-			$ossClient = new OssClient(Wnd_OSS::$access_key_id, Wnd_OSS::$access_key_secret, Wnd_OSS::$endpoint);
-			$ossClient->uploadFile(Wnd_OSS::$bucket, $oss_file, $file);
+			$ossClient = new OssClient(self::$access_key_id, self::$access_key_secret, self::$endpoint);
+			$ossClient->uploadFile(self::$bucket, $oss_file, $file);
 		} catch (OssException $e) {
 			return $e->getMessage() . '@' . __FUNCTION__;
 		}
@@ -107,7 +107,7 @@ class Wnd_OSS {
 	 **/
 	public function delete_local_file($meta_id, $post_ID, $meta_key, $meta_value) {
 
-		if ('_wp_attachment_metadata' != $meta_key or Wnd_OSS::$local_storage) {
+		if ('_wp_attachment_metadata' != $meta_key or self::$local_storage) {
 			return;
 		}
 
@@ -133,12 +133,12 @@ class Wnd_OSS {
 
 		// 获取WordPress文件信息，并替换字符后，设定oss文件存储路径
 		$file = get_attached_file($post_ID);
-		$oss_file = str_replace(wp_get_upload_dir()['basedir'], Wnd_OSS::$bucket_path, $file);
+		$oss_file = str_replace(wp_get_upload_dir()['basedir'], self::$bucket_path, $file);
 		$oss_file = trim($oss_file, '/');
 
 		try {
-			$ossClient = new OssClient(Wnd_OSS::$access_key_id, Wnd_OSS::$access_key_secret, Wnd_OSS::$endpoint);
-			$ossClient->deleteObject(Wnd_OSS::$bucket, $oss_file);
+			$ossClient = new OssClient(self::$access_key_id, self::$access_key_secret, self::$endpoint);
+			$ossClient->deleteObject(self::$bucket, $oss_file);
 		} catch (OssException $e) {
 			return $e->getMessage() . '@' . __FUNCTION__;
 		}
@@ -183,7 +183,7 @@ class Wnd_OSS {
 	 * apply_filters( 'wp_get_attachment_url', $url, $post->ID )
 	 */
 	public function filter_attachment_url($url, $post_ID) {
-		return str_replace(wp_get_upload_dir()['baseurl'], Wnd_OSS::$baseurl, $url);
+		return str_replace(wp_get_upload_dir()['baseurl'], self::$baseurl, $url);
 	}
 
 	/**
