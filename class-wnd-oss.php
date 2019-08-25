@@ -64,7 +64,6 @@ class Wnd_OSS {
 		add_filter('wp_get_attachment_url', array($this, 'filter_attachment_url'), 10, 2);
 		add_filter('wp_calculate_image_srcset', array($this, 'filter_wp_srcset'), 10, 1);
 		add_filter('wp_get_attachment_image_src', array($this, 'filter_attachment_image_src'), 10, 1);
-
 	}
 
 	/**
@@ -96,7 +95,6 @@ class Wnd_OSS {
 		} catch (OssException $e) {
 			return $e->getMessage() . '@' . __FUNCTION__;
 		}
-
 	}
 
 	/**
@@ -106,7 +104,6 @@ class Wnd_OSS {
 	 *@see do_action( "added_{$meta_type}_meta", $mid, $object_id, $meta_key, $_meta_value )
 	 **/
 	public function delete_local_file($meta_id, $post_ID, $meta_key, $meta_value) {
-
 		if ('_wp_attachment_metadata' != $meta_key or self::$local_storage) {
 			return;
 		}
@@ -119,7 +116,6 @@ class Wnd_OSS {
 		$backup_sizes = get_post_meta($post_ID, '_wp_attachment_backup_sizes', true);
 		$file = get_attached_file($post_ID);
 		wp_delete_attachment_files($post_ID, $meta, $backup_sizes, $file);
-
 	}
 
 	/**
@@ -142,7 +138,6 @@ class Wnd_OSS {
 		} catch (OssException $e) {
 			return $e->getMessage() . '@' . __FUNCTION__;
 		}
-
 	}
 
 	/**
@@ -150,7 +145,6 @@ class Wnd_OSS {
 	 *替换wordpress file meta
 	 */
 	public function filter_attachment_meta($data) {
-
 		if (empty($data['sizes']) || (wp_debug_backtrace_summary(null, 4, false)[0] == 'wp_delete_attachment')) {
 			return $data;
 		}
@@ -208,5 +202,4 @@ class Wnd_OSS {
 	public function filter_wp_srcset($sources) {
 		return false;
 	}
-
 }

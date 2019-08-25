@@ -9,7 +9,6 @@ class Wnd_CDN extends CDN_Rewrite {
 	protected static $option;
 
 	public function __construct() {
-
 		self::$option = get_option('wndoss');
 		parent::__construct(
 			self::$option['wndoss_site_url'] ?? get_option('siteurl'),
@@ -26,7 +25,6 @@ class Wnd_CDN extends CDN_Rewrite {
 			ob_start(array(&$this, 'rewrite'));
 		}
 	}
-
 }
 
 class CDN_Rewrite {
@@ -84,5 +82,4 @@ class CDN_Rewrite {
 		$regex .= '/(?:((?:' . $dirs . ')[^\"\')]+)|([^/\"\']+\.[^/\"\')]+))(?=[\"\')])#';
 		return preg_replace_callback($regex, array(&$this, 'rewrite_single'), $content);
 	}
-
 }
