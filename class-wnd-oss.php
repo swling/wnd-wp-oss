@@ -33,7 +33,7 @@ class Wnd_OSS {
 		$option = get_option('wndoss');
 
 		// 不解释
-		self::$access_key_id = $option['wndoss_access_key_id'] ?? '';
+		self::$access_key_id     = $option['wndoss_access_key_id'] ?? '';
 		self::$access_key_secret = $option['wndoss_access_key_secret'] ?? '';
 
 		// Endpoint如服务器与oss所属同一区域，可填内网地址。
@@ -74,12 +74,12 @@ class Wnd_OSS {
 	public function oss_upload($post_ID) {
 
 		// 获取WordPress上传并处理后文件
-		$file = get_attached_file($post_ID);
+		$file     = get_attached_file($post_ID);
 		$oss_file = str_replace(wp_get_upload_dir()['basedir'], self::$bucket_path, $file);
 		$oss_file = trim($oss_file, '/');
 
 		// 调用WordPress，根据尺寸进行图片裁剪、上传到oss的文件将是按指定尺寸裁剪后的文件
-		$save_width = $_POST["save_width"] ?? 0;
+		$save_width  = $_POST["save_width"] ?? 0;
 		$save_height = $_POST["save_height"] ?? 0;
 		if ($save_width or $save_height) {
 			$image_editor = wp_get_image_editor($file);
@@ -112,9 +112,9 @@ class Wnd_OSS {
 		 *$meta = wp_get_attachment_metadata($post_ID);
 		 *因为插件对 wp_get_attachment_metadata 进行了oss远程重写，因此此处不可采用 wp_get_attachment_metadata获取
 		 */
-		$meta = $meta_value;
+		$meta         = $meta_value;
 		$backup_sizes = get_post_meta($post_ID, '_wp_attachment_backup_sizes', true);
-		$file = get_attached_file($post_ID);
+		$file         = get_attached_file($post_ID);
 		wp_delete_attachment_files($post_ID, $meta, $backup_sizes, $file);
 	}
 
@@ -128,7 +128,7 @@ class Wnd_OSS {
 	public function oss_delete($post_ID) {
 
 		// 获取WordPress文件信息，并替换字符后，设定oss文件存储路径
-		$file = get_attached_file($post_ID);
+		$file     = get_attached_file($post_ID);
 		$oss_file = str_replace(wp_get_upload_dir()['basedir'], self::$bucket_path, $file);
 		$oss_file = trim($oss_file, '/');
 

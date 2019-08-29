@@ -29,17 +29,17 @@ class Wnd_CDN extends CDN_Rewrite {
 
 class CDN_Rewrite {
 
-	protected $blog_url = null;
-	protected $cdn_url = null;
+	protected $blog_url     = null;
+	protected $cdn_url      = null;
 	protected $include_dirs = null;
-	protected $excludes = array();
+	protected $excludes     = array();
 	protected $rootrelative = false;
 
 	function __construct($blog_url, $cdn_url, $include_dirs, array $excludes, $root_relative = false) {
-		$this->blog_url = $blog_url;
-		$this->cdn_url = $cdn_url;
+		$this->blog_url     = $blog_url;
+		$this->cdn_url      = $cdn_url;
 		$this->include_dirs = $include_dirs;
-		$this->excludes = $excludes;
+		$this->excludes     = $excludes;
 		$this->rootrelative = $root_relative;
 	}
 
@@ -74,7 +74,7 @@ class CDN_Rewrite {
 	}
 
 	public function rewrite(&$content) {
-		$dirs = $this->include_dirs_to_pattern();
+		$dirs  = $this->include_dirs_to_pattern();
 		$regex = '#(?<=[(\"\'])';
 		$regex .= $this->rootrelative
 		? ('(?:' . quotemeta($this->blog_url) . ')?')
