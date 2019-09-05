@@ -147,7 +147,7 @@ function wndoss_options()
 					<td valign="top">CDN 目录</td>
 					<td>
 						<input type="text" name="wndoss_cdn_dirs" value="<?php echo $options['wndoss_cdn_dirs'] ?? ''; ?>" class="regular-text">
-						<p><i>*哪些目录的具体资源需要设置CDN，通常为wp-content / wp-includes</i></p>
+						<p><i>*哪些目录的具体资源需要设置CDN，以英文逗号区分，通常为wp-content,wp-includes</i></p>
 					</td>
 				</tr>
 
@@ -155,7 +155,7 @@ function wndoss_options()
 					<td valign="top">CDN 文件后缀排除</td>
 					<td>
 						<input type="text" name="wndoss_cdn_excludes" value="<?php echo $options['wndoss_cdn_excludes'] ?? ''; ?>" class="regular-text">
-						<p><i>*以逗号区分如：.php, .flv, .do</i></p>
+						<p><i>*以英文逗号区分如：.php, .flv, .do</i></p>
 					</td>
 				</tr>
 
