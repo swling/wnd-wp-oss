@@ -80,7 +80,7 @@ function wndoss_options()
 				<tr>
 					<td valign="top">OSS accessKeySecrety</td>
 					<td>
-						<input type="text" name="wndoss_access_key_secret" value="<?php echo $options['wndoss_access_key_secret'] ?? ''; ?>" class="regular-text" />
+						<input type="password" name="wndoss_access_key_secret" value="<?php echo $options['wndoss_access_key_secret'] ?? ''; ?>" class="regular-text" />
 					</td>
 				</tr>
 				<tr>
@@ -109,8 +109,8 @@ function wndoss_options()
 				<tr>
 					<td valign="top">OSS base url</td>
 					<td>
-						<input type="text" name="wndoss_baseurl" value="<?php echo $options['wndoss_baseurl'] ?? ''; ?>" class="regular-text">
-						<p><i>*OSS文件公网访问路径。通常为：Bucket域名 + 本应用对应的存储路径</i></p>
+						<input type="url" name="wndoss_baseurl" value="<?php echo $options['wndoss_baseurl'] ?? ''; ?>" class="regular-text">
+						<p><i>*OSS文件公网访问路径。通常为：Bucket域名 + 本应用对应的存储路径(不要忘了 http://)</i></p>
 					</td>
 				</tr>
 
