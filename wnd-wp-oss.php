@@ -11,19 +11,18 @@
  *
  *@since 2019.07.26
  */
-$option = get_option('wndoss');
 
 require __DIR__ . '/autoload.php';
-require __DIR__ . '/options.php';
-require __DIR__ . '/class-wnd-oss.php';
-require __DIR__ . '/class-wnd-cdn.php';
+if (is_admin()) {
+	require __DIR__ . '/options.php';
+}
 
-new WND\OSS\Wnd_OSS();
+new WndOSS\WndOSS();
 
 /**
  *@since 2019.07.29
  *新增CDN功能
  */
-if ($option['wndoss_enable_cdn'] ?? false) {
-	new WND\CDN\Wnd_CDN();
+if (get_option('wndoss')['wndoss_enable_cdn'] ?? false) {
+	new WndOSS\WndCDN();
 }

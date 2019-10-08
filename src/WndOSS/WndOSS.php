@@ -1,5 +1,5 @@
 <?php
-namespace WND\OSS;
+namespace WndOSS;
 
 use OSS\Core\OssException;
 use OSS\OssClient;
@@ -11,7 +11,7 @@ use OSS\OssClient;
  *根据attachment id获取服务器文件路径，上传至oss
  *上传oss成功后，删除本地文件
  */
-class Wnd_OSS {
+class WndOSS {
 
 	protected static $access_key_id;
 	protected static $access_key_secret;
