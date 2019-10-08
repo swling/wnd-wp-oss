@@ -2,7 +2,7 @@
 /**
  *自动加载器
  */
-function classLoader($class) {
+spl_autoload_register(function ($class) {
 	if (stripos($class, 'OSS\\') !== 0 and stripos($class, 'WndOSS\\') !== 0) {
 		return;
 	}
@@ -12,5 +12,4 @@ function classLoader($class) {
 	if (file_exists($file)) {
 		require $file;
 	}
-}
-spl_autoload_register('classLoader');
+});

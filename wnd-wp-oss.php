@@ -17,6 +17,7 @@ if (is_admin()) {
 	require __DIR__ . '/options.php';
 }
 
+// 启用OSS
 new WndOSS\WndOSS();
 
 /**
