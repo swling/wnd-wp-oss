@@ -53,11 +53,11 @@ class WndOSS {
 		 */
 
 		// 上传文件
-		add_action('add_attachment', array($this, 'oss_upload'), 10, 1);
+		add_action('add_attachment', array($this, 'upload_to_oss'), 10, 1);
 		// 删除本地文件
 		add_action('added_post_meta', array($this, 'delete_local_file'), 10, 4);
 		// 同步删除远程文件
-		add_action('delete_attachment', array($this, 'oss_delete'), 10, 1);
+		add_action('delete_attachment', array($this, 'delete_oss_file'), 10, 1);
 
 		// 重写附件链接
 		add_filter('wp_get_attachment_metadata', array($this, 'filter_attachment_meta'), 10, 1);
@@ -69,9 +69,8 @@ class WndOSS {
 	/**
 	 *@since 2019.07.26
 	 *在WordPress上传到本地服务器之后，将文件上传到oss
-	 *根据用户设置选择是否删除本地文件
 	 **/
-	public function oss_upload($post_ID) {
+	public function upload_to_oss($post_ID) {
 
 		// 获取WordPress上传并处理后文件
 		$file     = get_attached_file($post_ID);
@@ -120,12 +119,11 @@ class WndOSS {
 
 	/**
 	 *@since 2019.07.26
-	 *在WordPress上传到本地服务器之后，将文件上传到oss
-	 *根据用户设置选择是否删除本地文件
+	 *删除OSS文件
 	 *
 	 *do_action( 'delete_attachment', $post_id );
 	 **/
-	public function oss_delete($post_ID) {
+	public function delete_oss_file($post_ID) {
 
 		// 获取WordPress文件信息，并替换字符后，设定oss文件存储路径
 		$file     = get_attached_file($post_ID);
