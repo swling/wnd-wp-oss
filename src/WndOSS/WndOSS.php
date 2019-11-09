@@ -165,7 +165,7 @@ class WndOSS {
 	 *@since 2019.07.26
 	 *阿里云图片处理
 	 */
-	protected function aliyun_image_resize($file, $width, $height) {
+	protected function aliyun_resize_image($file, $width, $height) {
 		return "{$file}?x-oss-process=image/resize,m_fill,h_{$height},w_{$width}";
 	}
 
@@ -185,7 +185,7 @@ class WndOSS {
 	 */
 	public function filter_attachment_image_src($image) {
 		$oss_image = array(
-			$this->aliyun_image_resize($image[0], $image[1], $image[2]),
+			$this->aliyun_resize_image($image[0], $image[1], $image[2]),
 			$image[1],
 			$image[2],
 		);
