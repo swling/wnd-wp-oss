@@ -2,9 +2,9 @@
 /**
  *@since 2019.06.27 自定义cdn
  **/
-namespace WndOSS;
+namespace WPOSS;
 
-class WndCDN extends CDN_Rewrite {
+class CDN extends CDN_Rewrite {
 
 	protected static $option;
 

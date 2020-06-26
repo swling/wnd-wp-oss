@@ -18,12 +18,12 @@ if (is_admin()) {
 }
 
 // 启用OSS
-new WndOSS\WndOSS();
+new WPOSS\FileHandler();
 
 /**
  *@since 2019.07.29
  *新增CDN功能
  */
 if (get_option('wndoss')['wndoss_enable_cdn'] ?? false) {
-	new WndOSS\WndCDN();
+	new WPOSS\CDN();
 }

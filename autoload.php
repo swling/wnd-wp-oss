@@ -3,7 +3,7 @@
  *自动加载器
  */
 spl_autoload_register(function ($class) {
-	if (stripos($class, 'OSS\\') !== 0 and stripos($class, 'WndOSS\\') !== 0) {
+	if (stripos($class, 'OSS\\') !== 0 and stripos($class, 'WPOSS\\') !== 0) {
 		return;
 	}
 
