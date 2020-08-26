@@ -22,7 +22,7 @@ class CDN extends CDN_Rewrite {
 
 	public function register_as_output_buffer() {
 		if ($this->blog_url != self::$option['wndoss_cdn_url']) {
-			ob_start(array(&$this, 'rewrite'));
+			ob_start(array($this, 'rewrite'));
 		}
 	}
 }
@@ -43,7 +43,7 @@ class CDN_Rewrite {
 		$this->rootrelative = $root_relative;
 	}
 
-	protected function exclude_single(&$match) {
+	protected function exclude_single($match) {
 		foreach ($this->excludes as $badword) {
 			if (stristr($match, $badword) != false) {
 				return true;
@@ -52,7 +52,7 @@ class CDN_Rewrite {
 		return false;
 	}
 
-	protected function rewrite_single(&$match) {
+	protected function rewrite_single($match) {
 		if ($this->exclude_single($match[0])) {
 			return $match[0];
 		} else {
@@ -73,13 +73,13 @@ class CDN_Rewrite {
 		}
 	}
 
-	public function rewrite(&$content) {
+	public function rewrite($content) {
 		$dirs  = $this->include_dirs_to_pattern();
 		$regex = '#(?<=[(\"\'])';
 		$regex .= $this->rootrelative
 		? ('(?:' . quotemeta($this->blog_url) . ')?')
 		: quotemeta($this->blog_url);
 		$regex .= '/(?:((?:' . $dirs . ')[^\"\')]+)|([^/\"\']+\.[^/\"\')]+))(?=[\"\')])#';
-		return preg_replace_callback($regex, array(&$this, 'rewrite_single'), $content);
+		return preg_replace_callback($regex, array($this, 'rewrite_single'), $content);
 	}
 }
