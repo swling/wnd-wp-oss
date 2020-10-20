@@ -92,7 +92,12 @@ class FileHandler {
 			$ossClient = new OssClient(self::$access_key_id, self::$access_key_secret, self::$endpoint);
 			$ossClient->uploadFile(self::$bucket, $oss_file, $file);
 		} catch (OssException $e) {
-			return $e->getMessage() . '@' . __FUNCTION__;
+			/**
+			 *@data 2020.10.20
+			 *同步上传失败，则删除本条附件，防止产生孤立附件
+			 */
+			wp_delete_attachment($post_ID, true);
+			exit($e->getMessage() . '@' . __FUNCTION__);
 		}
 	}
 
