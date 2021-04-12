@@ -17,7 +17,7 @@ class CDN extends CDN_Rewrite {
 			array_map('trim', explode(',', self::$option['wndoss_cdn_excludes'] ?? '.php'))
 		);
 
-		add_action('template_redirect', array($this, 'register_as_output_buffer'));
+		add_action('setup_theme', array($this, 'register_as_output_buffer'));
 	}
 
 	public function register_as_output_buffer() {
