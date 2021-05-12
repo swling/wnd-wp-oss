@@ -27,3 +27,8 @@ new WPOSS\FileHandler();
 if (get_option('wndoss')['wndoss_enable_cdn'] ?? false) {
 	new WPOSS\CDN();
 }
+
+// 卸载：删除数据
+register_deactivation_hook(__FILE__, function () {
+	delete_option('wndoss');
+});
